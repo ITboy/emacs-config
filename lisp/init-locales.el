@@ -17,4 +17,6 @@
   (set-selection-coding-system (if (eq system-type 'windows-nt) 'utf-16-le 'utf-8))
   (prefer-coding-system 'utf-8))
 
+                                        ;(require-package 'chinese-fonts-setup) ;;解决在org table里中英文对齐的的问题
+(require 'chinese-fonts-setup) ;;解决在org table里中英文对齐的的问题
 (provide 'init-locales)

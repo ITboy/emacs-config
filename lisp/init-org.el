@@ -38,7 +38,7 @@
   (or (and (looking-at org-outline-regexp) (looking-back "^\**"))
       (save-excursion (and (looking-at (org-item-re)) (looking-back "^[ \t]*")))))
 (setq org-use-speed-commands 'my/org-use-speed-commands-for-headings-and-lists)
-(eval-after-load "org" (progn
+(eval-after-load "org" '(progn
                          (add-to-list 'org-speed-commands-user '("x" org-todo "DONE"))
                          (add-to-list 'org-speed-commands-user '("y" org-todo-yesterday "DONE"))
                          (add-to-list 'org-speed-commands-user '("!" my/org-clock-in-and-track))
@@ -52,30 +52,13 @@
                          (add-to-list 'org-speed-commands-user '("W" widen))))
 
 ;; capture
-(setq org-capture-templates '(("t" "待处理的任务" entry (file+headline "~/private/me/orgaziner.org" "Inbox") "* TODO %^{Task}")
-                              ))
+(setq org-capture-templates '(("t" "待处理的任务" entry
+                               (file+headline (concat org-directory "/" "gtd.org") "Inbox") "* TODO %^{Task}")))
 
 ;; refile
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))))
 
 ;; archive
 (setq org-archive-location (concat org-directory "/" "archive.org::* From %s"))
-
-
-;; Mobile
-(setq exec-path (append exec-path '("C:/Program Files/Git/usr/bin")))
-
-(setq org-mobile-checksum-binary (or (executable-find "shasum")
-                                     (executable-find "sha1sum")
-                                     (executable-find "md5sum")
-                                     (executable-find "md5")))
-
-(setq org-mobile-directory (concat org-directory "/" "mobile"))
-
-;;(setq org-mobile-files org-agenda-files)
-
-(setq org-mobile-inbox-for-pull (concat org-directory "/" "capture.org"))
-
-(require 'chinese-fonts-setup) ;;解决在org table里中英文对齐的的问题
 
 (provide 'init-org)
