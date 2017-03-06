@@ -21,9 +21,9 @@
 
 ;;; Also use Melpa for most packages
 (if unofficial-elpa-url (progn
-                          (add-to-list 'package-archives '("melpa" . (concat unofficial-elpa-url "/melpa/")))
-                          (add-to-list 'package-archives '("gnu" . (concat unofficial-elpa-url "/gnu/")))
-                          (add-to-list 'package-archives '("marmalade" . (concat unofficial-elpa-url "/marmalade/"))))
+                          (add-to-list 'package-archives `("melpa" . ,(concat unofficial-elpa-url "/melpa/")))
+                          (add-to-list 'package-archives `("gnu" . ,(concat unofficial-elpa-url "/gnu/")))
+                          (add-to-list 'package-archives `("marmalade" . ,(concat unofficial-elpa-url "/marmalade/"))))
   (progn (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
          (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
          (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/")))
