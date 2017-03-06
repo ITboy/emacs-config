@@ -10,20 +10,9 @@
 
 (require 'package)
 
-
+(setq unofficial-elpa-url "http://15.114.119.49/elpa")
 
-;;; Standard package repositories
 
-(when (< emacs-major-version 24)
-  ;; Mainly for ruby-mode
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/")))
-
-;; We include the org repository for completeness, but don't normally
-;; use it.
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-
-(when (< emacs-major-version 24)
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
 
 (defconst sanityinc/no-ssl (or (< emacs-major-version 24)
@@ -31,10 +20,20 @@
                                     (not (gnutls-available-p)))))
 
 ;;; Also use Melpa for most packages
-(add-to-list 'package-archives
-             `("melpa" . ,(if sanityinc/no-ssl
-                              "http://melpa.org/packages/"
-                            "https://melpa.org/packages/")))
+(if unofficial-elpa-url (progn
+                          (add-to-list 'package-archives '("melpa" . (concat unofficial-elpa-url "/melpa/")))
+                          (add-to-list 'package-archives '("gnu" . (concat unofficial-elpa-url "/gnu/")))
+                          (add-to-list 'package-archives '("marmalade" . (concat unofficial-elpa-url "/marmalade/"))))
+  (progn (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+         (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+         (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/")))
+  )
+
+
+;; We include the org repository for completeness, but don't normally
+;; use it.
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+
 
 ;; NOTE: In case of MELPA problems, the official mirror URL is
 ;; https://www.mirrorservice.org/sites/stable.melpa.org/packages/

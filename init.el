@@ -1,3 +1,7 @@
+(setq url-proxy-services
+   '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+     ("http" . "web-proxy.cup.hp.com:8088")
+     ("https" . "web-proxy.cup.hp.com:8088")))
 
 ;;; This file bootstraps the configuration, which is divided into
 ;;; a number of other files.
